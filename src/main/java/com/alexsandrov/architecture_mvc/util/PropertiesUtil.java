@@ -44,7 +44,7 @@ public final class PropertiesUtil {
     /**
      * Статический метод для получения конфигурации по ключу
      */
-    private static String get(String key) {
+    public static String get(String key) {
         return PROPERTIES.getProperty(key);
     }
 }
