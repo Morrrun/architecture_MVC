@@ -13,6 +13,11 @@ import java.util.Optional;
 
 public class FlightDao implements Dao<Long, Flight>{
 
+    private static final FlightDao INSTANCE = new FlightDao();
+
+    private FlightDao() {
+    }
+
     private static final String FIND_ALL = """
             SELECT * FROM flight
             """;
@@ -54,6 +59,11 @@ public class FlightDao implements Dao<Long, Flight>{
     public Flight save(Flight entity) {
         return null;
     }
+
+    public static FlightDao getInstance() {
+        return INSTANCE;
+    }
+
 
     private Flight buildFlight(ResultSet resultSet) throws SQLException {
         return new Flight(
