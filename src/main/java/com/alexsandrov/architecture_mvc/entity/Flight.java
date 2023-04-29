@@ -20,6 +20,6 @@ public class Flight {
     private String departureAirportCode;
     private LocalDateTime arrivalDate;
     private String arrivalAirportCode;
-    private Long aircraftId;
+    private Integer aircraftId;
     private FlightStatus status;
 }
