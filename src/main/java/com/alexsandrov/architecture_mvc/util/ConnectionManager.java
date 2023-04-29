@@ -1,15 +1,18 @@
 package com.alexsandrov.architecture_mvc.util;
 
+import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 /**
  * Утилитный класс для подключения к БД и получения Connection.
  * Имеет 3 статические переменные, которые хранят ключи к конфигурациям
  * из файла application.properties
  */
-public final class ConnectionManager {
+@UtilityClass
+public class ConnectionManager {
 
     private static final String URL_KEY = "db.url";
     private static final String USER_KEY = "db.user";
@@ -19,25 +22,16 @@ public final class ConnectionManager {
         loadDriver();
     }
 
+    @SneakyThrows
     private static void loadDriver() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        Class.forName("org.postgresql.Driver");
     }
 
-    private ConnectionManager() {
-    }
-
+    @SneakyThrows
     public static Connection get() {
-        try {
-            return DriverManager.getConnection(
-                    PropertiesUtil.get(URL_KEY),
-                    PropertiesUtil.get(USER_KEY),
-                    PropertiesUtil.get(PASSWORD_KEY));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return DriverManager.getConnection(
+                PropertiesUtil.get(URL_KEY),
+                PropertiesUtil.get(USER_KEY),
+                PropertiesUtil.get(PASSWORD_KEY));
     }
 }
